@@ -8,12 +8,16 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "prettier": 
-    {
-      "trailingComma": "es5",
-      "tabWidth": 4,
-      "semi": false,
-      "singleQuote": true
-    }
-  
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": true
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "mongodb": "^5.5.0",
+    "mongoose": "^7.2.0",
+    "next-auth": "^4.22.1"
+  }
 }
