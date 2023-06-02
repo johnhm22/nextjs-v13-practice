@@ -4,20 +4,21 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
-import { IPost } from '@utils/interfaces';
 
+import { IPost } from '@utils/interfaces';
 interface IProps {
-    post: IPost;
+    post: string;
+    tag: string;
     image: string;
     username: string;
     email: string;
-    handleTagClick: (e: React.MouseEvent) => void;
+    handleTagClick: (arg0: string) => void;
     handleEdit: () => void;
     handleDelete: () => void;
 }
-
 const PromptCard: React.FC<IProps> = ({
-    post,
+    prompt,
+    tag,
     image,
     username,
     email,
@@ -25,6 +26,14 @@ const PromptCard: React.FC<IProps> = ({
     handleEdit,
     handleDelete,
 }) => {
+    const [copied, setCopied] = useState('');
+
+    const handleCopy = () => {
+        setCopied(prompt);
+        navigator.clipboard.writeText(prompt);
+        setTimeout(() => setCopied(''), 3000);
+    };
+
     return (
         <div className="prompt_card">
             <div className="flex justify-between items-start gap-5">
@@ -44,10 +53,27 @@ const PromptCard: React.FC<IProps> = ({
                             {email}
                         </p>
                     </div>
-
-                    {/* <p>{post}</p> */}
+                </div>
+                <div className="copy_btn" onClick={handleCopy}>
+                    <Image
+                        src={
+                            copied === prompt
+                                ? '/assets/icons/tick.svg'
+                                : '/assets/icons/copy.svg'
+                        }
+                        width={12}
+                        height={12}
+                        alt="copied icon"
+                    />
                 </div>
             </div>
+            <p className="my-4 font-satoshi text-sm">{prompt}</p>
+            <p
+                className="font-inter text-sm blue_gradient cursor-pointer"
+                onClick={() => handleTagClick && handleTagClick(tag)}
+            >
+                {tag}
+            </p>
         </div>
     );
 };
