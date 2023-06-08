@@ -3,8 +3,8 @@ import PromptCard from './PromptCard';
 import { IPromptPost } from '@utils/interfaces';
 
 interface IProps {
-    data: IPromptPost[];
-    handleTagClick: (e: React.MouseEvent<HTMLFormElement>) => void;
+    data?: IPromptPost[];
+    handleTagClick: (arg0: string) => void;
 }
 
 const PromptCardList: React.FC<IProps> = ({ data, handleTagClick }) => {
@@ -13,11 +13,7 @@ const PromptCardList: React.FC<IProps> = ({ data, handleTagClick }) => {
             {data?.map((post: IPromptPost) => (
                 <PromptCard
                     key={post._id}
-                    prompt={post.prompt}
-                    tag={post.tag}
-                    image={post.creator.image}
-                    username={post.creator.username}
-                    email={post.creator.email}
+                    post={post}                
                     handleTagClick={handleTagClick}
                 />
             ))}

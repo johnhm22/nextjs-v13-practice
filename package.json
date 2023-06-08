@@ -15,10 +15,19 @@
         "singleQuote": true
     },
     "dependencies": {
+        "@types/lodash": "^4.14.195",
+        "autoprefixer": "^10.4.14",
         "axios": "^1.4.0",
         "bcrypt": "^5.1.0",
+        "lodash.debounce": "^4.0.8",
         "mongodb": "^5.5.0",
         "mongoose": "^7.2.0",
-        "next-auth": "^4.22.1"
+        "next-auth": "^4.22.1",
+        "tailwindcss": "^3.3.2"
+    },
+    "devDependencies": {
+        "@types/lodash.debounce": "^4.0.7",
+        "@types/react": "18.2.8",
+        "typescript": "5.1.3"
     }
 }

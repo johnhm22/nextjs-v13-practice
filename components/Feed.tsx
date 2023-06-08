@@ -2,25 +2,39 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import debounce from 'lodash.debounce';
 
-import { IPost } from '@utils/interfaces';
+import { IPromptPost } from '@utils/interfaces';
 import PromptCardList from './PromptCardList';
 
 const Feed = () => {
     const [searchText, setSearchText] = useState<string>('');
-    const [posts, setPosts] = useState<IPost>();
+    const [posts, setPosts] = useState<IPromptPost[]>();
+
+    const getPrompts = async () => {
+        const response = await axios('api/prompt', {});
+        setPosts(response.data);
+    };
 
     useEffect(() => {
-        const getPrompts = async () => {
-            const response = await axios('api/prompt', {});
-            console.log('response for getPrompts: ', response.data);
-            console.log('response for creator: ', response.data[0].creator);
-            setPosts(response.data);
-        };
         getPrompts();
     }, []);
 
-    const handleSearchChange = (e) => {};
+    const debouncedSearch = debounce((arg) => {
+        setSearchText(arg);
+        if (arg === '') {
+            getPrompts();
+        } else {
+            const filteredPosts = posts!.filter((p) =>
+                p.prompt.includes(searchText)
+            );
+            setPosts(filteredPosts);
+        }
+    }, 200);
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        debouncedSearch(e.target.value);
+    };
 
     return (
         <section className="feed">

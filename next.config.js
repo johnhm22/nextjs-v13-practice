@@ -11,9 +11,10 @@ const nextConfig = {
         config.experiments = {
             ...config.experiments,
             topLevelAwait: true,
-        }
-        return config
+        };
+        return config;
     },
-}
+    reactStrictMode: true,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
