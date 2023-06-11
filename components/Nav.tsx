@@ -41,8 +41,8 @@ const Nav = () => {
         setUpProviders();
     }, []);
 
-    const signOut = () => {
-        console.log('Sign out button clicked');
+    const handleSignOut = () => {
+        signOut({ callbackUrl: 'http://localhost:3000' });
     };
 
     return (
@@ -68,7 +68,7 @@ const Nav = () => {
 
                         <button
                             type="button"
-                            onClick={signOut}
+                            onClick={handleSignOut}
                             className="outline_btn"
                         >
                             Sign Out

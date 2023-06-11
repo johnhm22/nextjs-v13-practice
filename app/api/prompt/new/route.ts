@@ -1,32 +1,14 @@
-// import { NextApiRequest, NextApiResponse } from 'next';
-
-// import { connectToDB } from '@utils/database'; //we need to connect to the DB so need this function
-// import Prompt from '@models/prompt';
-
-// export const POST = async (req: NextApiRequest, res: NextApiResponse) => {
-//     const { userId, prompt, tag } = req.body;
-
-//     try {
-//         await connectToDB(); //we connect to the db and then create a new prompt
-//         //here we need to call the model for the prompt which we still need to create
-//         const newPrompt = new Prompt({
-//             creator: userId,
-//             prompt,
-//             tag,
-//         });
-//         await newPrompt.save();
-//         return res.status(201).send(newPrompt);
-//     } catch (error) {
-// console.log("Error: ", error);
-// }
-// };
-
-import { connectToDB } from '@utils/database'; //we need to connect to the DB so need this function
-import Prompt from '@models/prompt';
 import { NextRequest, NextResponse } from 'next/server';
 
+import { connectToDB } from '@utils/database';
+import Prompt from '@models/prompt';
+
 export const POST = async (req: NextRequest, res: NextResponse) => {
-    const { userId, prompt, tag } = await req.json();
+    let { tag, userId, prompt } = await req.json();
+
+    if (tag[0] !== '#') {
+        tag = '#' + tag;
+    }
 
     try {
         await connectToDB(); //we connect to the db and then create a new prompt

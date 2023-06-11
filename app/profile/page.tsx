@@ -6,15 +6,18 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 import Profile from '@components/Profile';
-import { IPost, IPromptPost } from '@utils/interfaces';
+import { IPromptPost } from '@utils/interfaces';
 
 const MyProfile = () => {
     const { data: session } = useSession();
     const [myPosts, setMyPosts] = useState<IPromptPost[] | undefined>([]);
 
-    console.log('session in profile/page.tsx:', session);
-
     const router = useRouter();
+
+    if (!session?.user?.id) {
+        console.log('session when logged out', session);
+        router.push('/');
+    }
 
     const handleEdit = (id: string) => {
         router.push(`/update-prompt?id=${id}`);
@@ -44,18 +47,15 @@ const MyProfile = () => {
     };
 
     useEffect(() => {
-        console.log('useEffect called');
-        const getPrompts = async () => {
-            const response = await axios(
-                `api/users/${session?.user?.id}/posts`
-            );
-            setMyPosts(response.data);
-
-            // if (session?.user?.id) {
-            //     setMyPosts(response.data);
-            // }
-        };
-        getPrompts();
+        if (session?.user?.id) {
+            const getPrompts = async () => {
+                const response = await axios(
+                    `api/users/${session?.user?.id}/posts`
+                );
+                setMyPosts(response.data);
+            };
+            getPrompts();
+        }
     }, []);
 
     return (

@@ -1,13 +1,14 @@
 import Link from 'next/link';
 
 import { IPost } from '@utils/interfaces';
+import { FormEvent } from 'react';
 
 interface IProps {
     type: string;
     post: IPost;
     setPost: React.Dispatch<IPost>;
     submitting: boolean;
-    handleSubmit: (e: React.MouseEvent<HTMLFormElement>) => void;
+    handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
 const Form: React.FC<IProps> = ({

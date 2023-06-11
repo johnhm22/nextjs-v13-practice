@@ -21,7 +21,7 @@ const EditPrompt = () => {
     });
 
     useEffect(() => {
-        const getPromptDetails = async (promptId: IPost) => {
+        const getPromptDetails = async (promptId: string) => {
             const response = await axios({
                 url: `api/prompt/${promptId}`,
                 method: 'GET',
@@ -37,7 +37,7 @@ const EditPrompt = () => {
     }, [promptId]);
 
     //using axios
-    const updatePrompt = async (e: HTMLFormElement) => {
+    const updatePrompt = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setSubmitting(true);
 

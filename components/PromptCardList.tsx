@@ -13,7 +13,7 @@ const PromptCardList: React.FC<IProps> = ({ data, handleTagClick }) => {
             {data?.map((post: IPromptPost) => (
                 <PromptCard
                     key={post._id}
-                    post={post}                
+                    post={post}
                     handleTagClick={handleTagClick}
                 />
             ))}

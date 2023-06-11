@@ -5,13 +5,13 @@ import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { IPost, IPromptPost } from '@utils/interfaces';
-import { StringExpression } from 'mongoose';
+import { IPromptPost } from '@utils/interfaces';
+
 interface IProps {
     post: IPromptPost;
-    handleTagClick?: (arg0: string) => void;
-    handleEdit: (id: string) => void;
-    handleDelete: (id: string) => void;
+    handleTagClick?: (tag: string) => void;
+    handleEdit?: (id: string) => void;
+    handleDelete?: (id: string) => void;
 }
 const PromptCard: React.FC<IProps> = ({
     post,
@@ -26,11 +26,21 @@ const PromptCard: React.FC<IProps> = ({
     const router = useRouter();
 
     const newHandleEdit = (id: string) => {
-        handleEdit(id);
+        if (handleEdit) {
+            handleEdit(id);
+        }
     };
 
     const newHandleDelete = (id: string) => {
-        handleDelete(id);
+        if (handleDelete) {
+            handleDelete(id);
+        }
+    };
+
+    const newHandleTagClick = (tag: string) => {
+        if (handleTagClick) {
+            handleTagClick(tag);
+        }
     };
 
     const handleCopy = () => {
@@ -42,7 +52,14 @@ const PromptCard: React.FC<IProps> = ({
     return (
         <div className="prompt_card">
             <div className="flex justify-between items-start gap-5">
-                <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+                <div
+                    className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
+                    onClick={() =>
+                        router.push(
+                            `profile/${post.creator._id}/${post.creator.username}/posts`
+                        )
+                    }
+                >
                     <Image
                         src={post.creator.image}
                         alt="user_image"
@@ -75,7 +92,7 @@ const PromptCard: React.FC<IProps> = ({
             <p className="my-4 font-satoshi text-sm">{post.prompt}</p>
             <p
                 className="font-inter text-sm blue_gradient cursor-pointer"
-                onClick={() => handleTagClick && handleTagClick(post.tag)}
+                onClick={() => newHandleTagClick(post.tag)}
             >
                 {post.tag}
             </p>

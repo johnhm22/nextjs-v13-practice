@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
 
@@ -21,19 +21,35 @@ const Feed = () => {
     }, []);
 
     const debouncedSearch = debounce((arg) => {
+        console.log('debouncedSearch called');
+        console.log('search arg in debounce: ', arg);
         setSearchText(arg);
         if (arg === '') {
             getPrompts();
         } else {
-            const filteredPosts = posts!.filter((p) =>
-                p.prompt.includes(searchText)
+            const filteredPosts = posts!.filter(
+                (p) =>
+                    p.prompt.includes(searchText) ||
+                    // p.creator.username === searchText ||
+                    p.tag === searchText
             );
             setPosts(filteredPosts);
         }
     }, 200);
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('e.target.value: ', e.target.value);
         debouncedSearch(e.target.value);
+    };
+
+    const tagSearch = (tag: string) => {
+        const filteredPosts = posts!.filter((p) => p.tag === tag);
+        setPosts(filteredPosts);
+    };
+
+    const handleTagClick = (tag: string) => {
+        setSearchText(tag);
+        tagSearch(tag);
     };
 
     return (
@@ -48,7 +64,7 @@ const Feed = () => {
                     className="search_input peer"
                 />
             </form>
-            <PromptCardList data={posts} handleTagClick={() => {}} />
+            <PromptCardList data={posts} handleTagClick={handleTagClick} />
         </section>
     );
 };
