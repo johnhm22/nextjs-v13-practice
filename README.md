@@ -16,10 +16,10 @@ At the time of writing (and developing) Next.js 13 had just recently become avai
 Ref.: https://www.youtube.com/watch?v=wm5gMKuwSYk&t=4s
 
 ## Tech stack
-Next.js 13 (of course) with TypeScript
-NextAuth.js for authentication using Google as a provider
-MongoDB Atlas deployed in the cloud
-Tailwind CSS
+* Next.js 13 (of course) with TypeScript
+* NextAuth.js for authentication using Google as a provider
+* MongoDB Atlas deployed in the cloud
+* Tailwind CSS
 
 ## Getting Started
 
