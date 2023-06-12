@@ -2,18 +2,12 @@
 
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 import Profile from '@components/Profile';
 import { IPromptPost } from '@utils/interfaces';
 
-// interface IProps {
-//     userId: string;
-// }
-
 const UserProfile = ({ params }) => {
     const { id, userName } = params;
-    console.log('id sent to api route: ', id);
     const [userPosts, setUserPosts] = useState<IPromptPost[] | undefined>([]);
 
     useEffect(() => {

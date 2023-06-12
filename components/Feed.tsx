@@ -21,8 +21,6 @@ const Feed = () => {
     }, []);
 
     const debouncedSearch = debounce((arg) => {
-        console.log('debouncedSearch called');
-        console.log('search arg in debounce: ', arg);
         setSearchText(arg);
         if (arg === '') {
             getPrompts();
@@ -30,7 +28,7 @@ const Feed = () => {
             const filteredPosts = posts!.filter(
                 (p) =>
                     p.prompt.includes(searchText) ||
-                    // p.creator.username === searchText ||
+                    p.creator.username === searchText ||
                     p.tag === searchText
             );
             setPosts(filteredPosts);
@@ -38,7 +36,6 @@ const Feed = () => {
     }, 200);
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log('e.target.value: ', e.target.value);
         debouncedSearch(e.target.value);
     };
 
