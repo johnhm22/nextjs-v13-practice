@@ -1,5 +1,26 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# Promptopia - Discovering Next.js 13
+![image](https://github.com/johnhm22/nextjs-v13-practice/assets/71333679/1dd7b341-8550-4d52-bdd8-c73d83d25bcb)
+
+## What does it do?
+The Promptopia app allows the user to:
+* View all prompts from other users - prompt details, user name and email, hashtags for each prompt
+* Login via Google
+* When logged in, create, edit and delete their own AI prompts along with associated hashtags by sending RESTful api requests to a mongodb cloud database
+
+
+## Intro
+At the time of writing (and developing) Next.js 13 had just recently become available. Having worked previously on a large, complex app using Next.js 12, I was keen to understand the differences and new features. I found this YouTube tutorial that took you through a simple project. I coded along, adding features which I felt added to the learning experience. For example, I used TypeScript and also the axios library for api calls.
+
+Ref.: https://www.youtube.com/watch?v=wm5gMKuwSYk&t=4s
+
+## Tech stack
+* Next.js 13 (of course) with TypeScript
+* NextAuth.js for authentication using Google as a provider
+* MongoDB Atlas deployed in the cloud
+* Tailwind CSS
+
 ## Getting Started
 
 First, run the development server:
