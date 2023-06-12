@@ -1,5 +1,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# Promptopia - Discovering Next.js 13
+
+## Intro
+At the time of writing (and developing) Next.js 13 had just recently become available. Having worked previously on a large, complex app using Next.js 12, I was keen to understand the differences and new features. I found this YouTube tutorial that took you through a simple project. I coded along, adding features which I felt added to the learning experience. For example, I used TypeScript and also the axios library for api calls.
+
 ## Getting Started
 
 First, run the development server:
