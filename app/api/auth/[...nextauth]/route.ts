@@ -5,6 +5,13 @@ import GoogleProvider, { GoogleProfile } from 'next-auth/providers/google';
 import { connectToDB } from '@utils/database';
 import User from '@models/user';
 
+interface IUser {
+    name?: string | null;
+    email?: string | null;
+    image?: string | null;
+    id?: string | null;
+}
+
 const handler: NextAuthOptions = NextAuth({
     providers: [
         GoogleProvider({
